@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+    <title>Invoice list</title>
+    <<link rel="stylesheet" href="bootstrap.css">
+    <script src="bootstrap.js"></script>
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="Model.js"></script>
+    <script type="text/javascript" src="InvoicesController.js"></script>
+</head>
+
+<body>
+    <div ng-controller="Invoices.Controller">
+        <form class="form-horizontal" ng-submit="addNewInvoice()">
+            <input type="number" ng-model="newInvoiceId" size="30" placeholder="Invoice ID">
+            <input type="text" ng-model="newInvoiceDescription" size="30" placeholder="Invoice description">
+            <input type="text" ng-model="newInvoiceCustomer" size="30" placeholder="Invoice customer">
+            <button class="btn" type="submit" value="add">
+                <i class="icon-plus"></i>
+            </button>
+        </form>
+        <table class="table table-striped table-hover" style="width: 500px;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Description</th>
+                    <th>Customer</th>
+                    <!--<th></th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Invoice in Invoices">
+                    <td>{{Invoice.Id}}</td>
+                    <td>{{Invoice.Description}}</td>
+                    <td>${{Invoice.Customer}}</td>
+                    <!--<td>
+                        <button class="btn-small" ng-click="deleteInvoice(Invoice.Id)">
+                            <i class="icon-trash"></i>
+                        </button>
+                    </td>-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
