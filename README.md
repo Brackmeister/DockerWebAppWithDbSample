@@ -51,3 +51,11 @@ How to run the example
     docker run -it -p 8080:5000 --link pgdb -e WEBAPI_CONNECTIONSTRING --name webapi --entrypoint=/bin/bash webapi
 
     # the single page application example to act as a client of the web api is not yet ready
+
+The environmentSettings.sh file
+-------------------------------
+
+It has to look like this
+
+    export POSTGRES_PASSWORD='<Choose a password here>'
+    export WEBAPI_CONNECTIONSTRING="Host=pgdb;Username=postgres;Password=$POSTGRES_PASSWORD"
