@@ -1,5 +1,5 @@
 FROM microsoft/aspnet
 WORKDIR /src
-COPY ./InvoiceWebApi/ ./
+COPY ./ ./
 RUN dnu restore
 ENTRYPOINT ["dnx", "web"]
