@@ -1,7 +1,7 @@
 /// <reference path='angular.d.ts' />  
 /// <reference path='model.ts' />
 
-module Invoices {
+module invoicesApp {
     export interface Scope {
         newInvoiceId: number;
         newInvoiceDescription: string;
@@ -15,7 +15,7 @@ module Invoices {
         private httpService: any;
         constructor($scope: Scope, $http: any) {
             this.baseUrl = "http://localhost:8080";
-            
+
             this.httpService = $http;
 
             this.refreshInvoices($scope);
@@ -24,14 +24,14 @@ module Invoices {
 
             $scope.addNewInvoice = function () {
                 var newInvoice = new Model.Invoice();
-                newInvoice.Id =$scope.newInvoiceId;
+                newInvoice.Id = $scope.newInvoiceId;
                 newInvoice.Description = $scope.newInvoiceDescription;
                 newInvoice.Customer = $scope.newInvoiceCustomer;
 
                 controller.addInvoice(newInvoice, function () {
                     controller.getAllInvoices(function (data) {
                         $scope.Invoices = data;
-                    },function(error){
+                    }, function (error) {
                         alert(error);
                     });
                 });
@@ -40,9 +40,9 @@ module Invoices {
         }
 
         getAllInvoices(successCallback: Function, errorCallback: Function): void {
-            this.httpService.get(this.baseUrl+'/api/invoices',{
-    headers: {'Origin': 'http://localhost'}
-  })
+            this.httpService.get(this.baseUrl + '/api/invoices', {
+                headers: { 'Origin': 'http://localhost' }
+            })
                 .success(function (data, status) {
                     successCallback(data);
                 })
@@ -52,13 +52,17 @@ module Invoices {
         }
 
         addInvoice(Invoice: Model.Invoice, successCallback: Function): void {
-            this.httpService.post(this.baseUrl+'/api/invoices', Invoice).success(function () {
+            this.httpService.post(this.baseUrl + '/api/invoices', Invoice, {
+                headers: { 'Origin': 'http://localhost' }
+            }).success(function () {
                 successCallback();
             });
         }
 
         deleteInvoice(InvoiceId: string, successCallback: Function): void {
-            this.httpService.delete(this.baseUrl+'/api/Invoices/' + InvoiceId).success(function () {
+            this.httpService.delete(this.baseUrl + '/api/Invoices/' + InvoiceId, {
+                headers: { 'Origin': 'http://localhost' }
+            }).success(function () {
                 successCallback();
             });
         }
@@ -66,8 +70,8 @@ module Invoices {
         refreshInvoices(scope: Scope) {
             this.getAllInvoices(function (data) {
                 scope.Invoices = data;
-            },function(error){
-               alert(error);
+            }, function (error) {
+                alert(error);
             });
         }
     }

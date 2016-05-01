@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="invoicesApp">
 
 <head>
     <title>Invoice list</title>
-    <<link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="bootstrap.css">
     <script src="bootstrap.js"></script>
     <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="model.js"></script>
     <script type="text/javascript" src="invoicesController.js"></script>
 </head>
 
 <body>
-    <div ng-controller="Invoices.Controller">
+    <div ng-controller="invoicesApp.Controller">
         <form class="form-horizontal" ng-submit="addNewInvoice()">
             <input type="number" ng-model="newInvoiceId" size="30" placeholder="Invoice ID">
             <input type="text" ng-model="newInvoiceDescription" size="30" placeholder="Invoice description">
@@ -33,7 +34,7 @@
                 <tr ng-repeat="Invoice in Invoices">
                     <td>{{Invoice.Id}}</td>
                     <td>{{Invoice.Description}}</td>
-                    <td>${{Invoice.Customer}}</td>
+                    <td>{{Invoice.Customer}}</td>
                     <!--<td>
                         <button class="btn-small" ng-click="deleteInvoice(Invoice.Id)">
                             <i class="icon-trash"></i>

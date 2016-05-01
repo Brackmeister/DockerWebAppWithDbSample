@@ -22,7 +22,7 @@ namespace InvoiceWebApi
                             {
                                 builder.AllowAnyOrigin()
                                        .AllowAnyMethod()
-                                       .AllowAnyMethod();
+                                       .AllowAnyHeader();
                             });
                 });
             services.AddMvc();
