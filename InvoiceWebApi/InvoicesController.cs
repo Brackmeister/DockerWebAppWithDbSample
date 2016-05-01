@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Npgsql;
 using Dapper;
+using Microsoft.AspNet.Cors;
 
 namespace InvoiceWebApi
 {
+    [EnableCors("AllowAllOrigins")]
     [Route("/api/invoices")]
     public class InvoicesController : Controller
     {

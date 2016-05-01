@@ -14,7 +14,7 @@ module Invoices {
         private baseUrl: string;
         private httpService: any;
         constructor($scope: Scope, $http: any) {
-            this.baseUrl = "http://192.168.178.24:8080";
+            this.baseUrl = "http://localhost:8080";
             
             this.httpService = $http;
 
@@ -40,7 +40,9 @@ module Invoices {
         }
 
         getAllInvoices(successCallback: Function, errorCallback: Function): void {
-            this.httpService.get(this.baseUrl+'/api/invoices')
+            this.httpService.get(this.baseUrl+'/api/invoices',{
+    headers: {'Origin': 'http://localhost'}
+  })
                 .success(function (data, status) {
                     successCallback(data);
                 })

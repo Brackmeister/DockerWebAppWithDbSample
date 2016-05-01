@@ -15,6 +15,16 @@ namespace InvoiceWebApi
         // configure dependency injection (no need for unity)
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowAllOrigins",
+                        builder =>
+                            {
+                                builder.AllowAnyOrigin()
+                                       .AllowAnyMethod()
+                                       .AllowAnyMethod();
+                            });
+                });
             services.AddMvc();
         }
 
@@ -23,20 +33,8 @@ namespace InvoiceWebApi
         {
             app.UseDeveloperExceptionPage();
             app.UseIISPlatformHandler();
+            app.UseCors("AllowAllOrigins");
             app.UseMvc();
-
-            // app.Use(async (context, next) =>
-            // {
-            //     await context.Response.WriteAsync(">>>");
-            //     await next();
-            //     await context.Response.WriteAsync("<<<");
-            //}
-            //     );
-
-            // app.Run(async (context) =>
-            // {
-            //     await context.Response.WriteAsync("Hello World!");
-            // });
         }
 
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
